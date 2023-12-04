@@ -14,7 +14,7 @@ def create_connection(db_file):
 
 # Вибір всіх значень в таблиці tasks
 def select_all_apps(conn):
-    sql = 'SELECT p.AppName, p.Username, p.Bug report FROM Bugtracker AS p'
+    sql = 'SELECT p.AppName, p.Username, p.Bug_report FROM Bugtracker AS p'
     cur = conn.cursor()
     cur.execute(sql)
     rows = cur.fetchall()
@@ -22,20 +22,20 @@ def select_all_apps(conn):
         print(row)
 
 # Створення нового завдання
-def add_app(conn, appname, username, Bug report):
-    sql = '''INSERT INTO Bugtracker(Appname, Username, Bug report) 
+def add_app(conn, appname, username, Bug_report):
+    sql = '''INSERT INTO Bugtracker(Appname, Username, Bug_report) 
              VALUES(%s, %s, %s)'''
-    values = (appname, username, Bug report)
+    values = (appname, username, Bug_report)
     cur = conn.cursor()
     cur.execute(sql, values)
 
 
 # Оновлення дати в завданні
-def update_app(conn, appname, username, Bug report, id):
+def update_app(conn, appname, username, Bug_report, id):
     sql = ''' UPDATE Bugtracker
-              SET AppName = %s, Username = %s, Bug report = %s
+              SET AppName = %s, Username = %s, Bug_report = %s
               WHERE AppId = %s'''
-    values = (appname, username, Bug report, id)
+    values = (appname, username, Bug_report, id)
 
     cur = conn.cursor()
     cur.execute(sql, values)
@@ -59,11 +59,11 @@ def main():
 
     # Використовуючи встановлене з'єднання виконуються операції над БД
     with conn:
-        print("All app, its usernames and bug reports")
+        print("All app, its usernames and Bug_reports")
         select_all_apps(conn)
         print("----------------")
 
-        add_app(conn, ("Viber, Andriy, No bug report"))
+        add_app(conn, ("Viber, Andriy, No Bug_report"))
         select_all_apps(conn)
         print("----------------") 
 
